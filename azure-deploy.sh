@@ -11,9 +11,9 @@ if [[ -f $FILE ]]; then
 else
 	cat << EOF > .env
 HOST="https://jsonplaceholder.typicode.com"
-TEST_CLIENTS=10
-USERS_PER_CLIENT=10
-SPAWN_RATE=10
+TEST_CLIENTS=20
+USERS_PER_CLIENT=1500
+SPAWN_RATE=100
 RESOURCE_GROUP="mrobertson"
 AZURE_STORAGE_ACCOUNT="umsloadtest"
 EOF
