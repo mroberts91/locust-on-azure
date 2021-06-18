@@ -11,11 +11,11 @@ if [[ -f $FILE ]]; then
 else
 	cat << EOF > .env
 HOST="https://jsonplaceholder.typicode.com"
-TEST_CLIENTS=1
-USERS_PER_CLIENT=1
-SPAWN_RATE=1
-RESOURCE_GROUP=""
-AZURE_STORAGE_ACCOUNT=""
+TEST_CLIENTS=10
+USERS_PER_CLIENT=10
+SPAWN_RATE=10
+RESOURCE_GROUP="mrobertson"
+AZURE_STORAGE_ACCOUNT="umsloadtest"
 EOF
 	echo "Enviroment file not detected."
 	echo "Please configure values for your environment in the created .env file"
