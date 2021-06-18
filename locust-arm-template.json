@@ -95,6 +95,7 @@
                     "type": "Public",
                     "ports": [
                         {
+                            "protocol": "tcp",
                             "port": 8089
                         },
                         {

@@ -10,10 +10,10 @@ if [[ -f $FILE ]]; then
     export $(egrep . $FILE | xargs -n1)
 else
 	cat << EOF > .env
-HOST="https://jsonplaceholder.typicode.com"
+HOST="https://www.anhelosalud.com"
 TEST_CLIENTS=20
-USERS_PER_CLIENT=1500
-SPAWN_RATE=100
+USERS_PER_CLIENT=1
+SPAWN_RATE=1
 RESOURCE_GROUP="mrobertson"
 AZURE_STORAGE_ACCOUNT="umsloadtest"
 EOF
