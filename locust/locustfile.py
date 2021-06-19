@@ -28,21 +28,22 @@ class APICalls(TaskSet):
 
     @task(9)
     def get_anhelo(self):
-        url = f"/anhelosalud{self.__get_url(self.anhelo_urls)}"
+        url = self.__get_url(self.anhelo_urls)
+        # url = f"/anhelosalud{self.__get_url(self.anhelo_urls)}"
         
         if url is None:
             url = "/anhelosalud"
 
         self.client.get(url, headers=self.headers)
 
-    @task(1)
-    def get_cp(self):
-        url =  f"/colonial-penn{self.__get_url(self.cp_urls)}"
+    # @task(1)
+    # def get_cp(self):
+    #     url =  f"/colonial-penn{self.__get_url(self.cp_urls)}"
         
-        if url is None:
-            url = "/colonial-penn"
+    #     if url is None:
+    #         url = "/colonial-penn"
 
-        self.client.get(url, headers=self.headers)
+    #     self.client.get(url, headers=self.headers)
 
     def __get_url(self, urls):
         return urls[random.randint(0, len(urls))]
