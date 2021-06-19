@@ -10,10 +10,10 @@ if [[ -f $FILE ]]; then
     export $(egrep . $FILE | xargs -n1)
 else
 	cat << EOF > .env
-HOST="https://www.anhelosalud.com"
+HOST="https://umsleads-prod-wa-cd-eus-001.azurewebsites.net"
 TEST_CLIENTS=20
-USERS_PER_CLIENT=1
-SPAWN_RATE=1
+USERS_PER_CLIENT=2500
+SPAWN_RATE=500
 RESOURCE_GROUP="mrobertson"
 AZURE_STORAGE_ACCOUNT="umsloadtest"
 EOF

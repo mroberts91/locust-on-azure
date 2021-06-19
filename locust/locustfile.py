@@ -1,9 +1,8 @@
-from locust import TaskSet, task, between
-from locust.contrib.fasthttp import FastHttpUser
+from locust import HttpUser, TaskSet, task, between
 import random
 
 class APICalls(TaskSet):    
-    get_urls = [
+    anhelo_urls = [
         "/",
         "/gracias",
         "/guia",
@@ -13,31 +12,41 @@ class APICalls(TaskSet):
         "/privacidad",
         "/condiciones",
         "/newsletter-confirmation",
-        "/authors",
-        "/authors/denira-borrero",
-        "/authors/daniela-agurcia",
-        "/authors/sofia-de-la-guardia",
-        "/authors/sheyla-benitez",
-        "/authors/ivan-ruiz",
-        "/authors/lina-manchola",
-        "/authors/jose-rodriguez",
-        "/authors/emily-love",
-        "/authors/jessica-martinez",
-        "/authors/mery-andrea-lopez",
         "/planes",
-        "/inicio-medicare"
+        "/inicio-medicare",
     ]
+    cp_urls = [
+        "/",
+        "/form?afid=12345&src=test",
+        "/thank-you",
+        "/price",
+        "/not-available"
+    ]
+    headers = {
+        "User-Agent":"Mozilla/5.0 tzt-loadtestbot (Windows NT 10.0; Win64; x64; rv:71.0) Gecko/20100101 Firefox/89.1",
+    }
 
-    @task()
-    def geturl(self):
-        url = self.get_urls[random.randint(0, len(self.get_urls))]
+    @task(9)
+    def get_anhelo(self):
+        url = f"/anhelosalud{self.__get_url(self.anhelo_urls)}"
+        
         if url is None:
-            url = "/"
-        self.client.get(url)
-    # @task()
-    # def postpost(self):        
-    #     self.client.post("/posts", {"title": "foo", "body": "bar", "userId": 1}, name="/posts")
+            url = "/anhelosalud"
 
-class APIUser(FastHttpUser):
+        self.client.get(url, headers=self.headers)
+
+    @task(1)
+    def get_cp(self):
+        url =  f"/colonial-penn{self.__get_url(self.cp_urls)}"
+        
+        if url is None:
+            url = "/colonial-penn"
+
+        self.client.get(url, headers=self.headers)
+
+    def __get_url(self, urls):
+        return urls[random.randint(0, len(urls))]
+
+class APIUser(HttpUser):
     tasks = [APICalls]
-    wait_time = between(2, 3.5) # seconds
+    wait_time = between(2, 3.5)
